@@ -1,0 +1,28 @@
+.order-list {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-list h3 {
+    color: #007bff;
+  }
+  
+  .order-list ul {
+    padding: 0;
+  }
+  
+  .order-list ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .order-list ul li button {
+    background-color: #dc3545;
+  }
+  
+  .order-list ul li button:hover {
+    background-color: #c82333;
+  }
+  

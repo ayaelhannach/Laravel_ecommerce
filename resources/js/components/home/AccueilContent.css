@@ -1,0 +1,14 @@
+.accueil-content {
+    padding: 20px;
+    background-color: #f1f1f1;
+    text-align: center;
+  }
+  
+  .accueil-content h2 {
+    color: #007bff;
+  }
+  
+  .accueil-content p {
+    color: #555;
+  }
+  

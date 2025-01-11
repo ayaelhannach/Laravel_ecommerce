@@ -1,0 +1,28 @@
+.customer-list {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .customer-list h3 {
+    color: #007bff;
+  }
+  
+  .customer-list ul {
+    padding: 0;
+  }
+  
+  .customer-list ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .customer-list ul li button {
+    background-color: #dc3545;
+  }
+  
+  .customer-list ul li button:hover {
+    background-color: #c82333;
+  }
+  
