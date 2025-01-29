@@ -2,46 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\Client;
+use App\Models\Commande;
 
-class OrderController extends Controller
+class ClientController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        return view('orders.index', ['orders' => Order::all()]);
+        $clients = Client::with('commandes')->get();
+        return view('clients.index', ['clients' => $clients]);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('orders.create');
+        return view('clients.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        Order::create($request->all());
-        return redirect()->route('orders.index');
+        $client = new Client();
+        $client->nom = $request->nom;
+        $client->telephone = $request->telephone;
+        $client->adresse = $request->adresse;
+        $client->ville = $request->ville;
+        $client->code_postale = $request->code_postale;
+        $client->pays = $request->pays;
+        $client->save();
+
+        return redirect()->route('clients.index')->with('success', 'Client ajouté avec succès.');
     }
 
-    public function show(Order $order)
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
     {
-        return view('orders.show', compact('order'));
+        $client = Client::with('commandes')->findOrFail($id);
+        return view('clients.show', ['client' => $client]);
     }
 
-    public function edit(Order $order)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
     {
-        return view('orders.edit', compact('order'));
+        $client = Client::findOrFail($id);
+        return view('clients.edit', ['client' => $client]);
     }
 
-    public function update(Request $request, Order $order)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
     {
-        $order->update($request->all());
-        return redirect()->route('orders.index');
+        $client = Client::findOrFail($id);
+        $client->nom = $request->nom;
+        $client->telephone = $request->telephone;
+        $client->adresse = $request->adresse;
+        $client->ville = $request->ville;
+        $client->code_postale = $request->code_postale;
+        $client->pays = $request->pays;
+        $client->save();
+
+        return redirect()->route('clients.index')->with('success', 'Client mis à jour avec succès.');
     }
 
-    public function destroy(Order $order)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
     {
-        $order->delete();
-        return redirect()->route('orders.index');
+        $client = Client::with('commandes')->findOrFail($id);
+        $client->commandes()->delete();
+        $client->delete();
+
+        return redirect()->route('clients.index')->with('success', 'Client supprimé avec succès.');
     }
 }
